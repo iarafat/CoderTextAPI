@@ -23,8 +23,8 @@ class CreateProductsTable extends Migration
             $table->enum('status', ['DRAFT', 'PUBLISHED', 'PENDING'])->default('DRAFT');
             $table->string('buy_now_link')->nullable();
             $table->string('live_demo_link')->nullable();
-            $table->string('seo_description')->nullable();
-            $table->string('seo_keywords')->nullable();
+            $table->string('meta_description')->nullable();
+            $table->string('meta_keywords')->nullable();
             $table->string('seo_title')->nullable();
             $table->timestamps();
         });
