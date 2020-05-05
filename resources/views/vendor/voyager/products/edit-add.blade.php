@@ -66,7 +66,7 @@
 
 @section('content')
     <div class="page-content container-fluid">
-        <form class="form-edit-add" role="form" action="@if($edit){{ route('voyager.posts.update', $dataTypeContent->id) }}@else{{ route('voyager.posts.store') }}@endif" method="POST" enctype="multipart/form-data">
+        <form class="form-edit-add" role="form" action="@if($edit){{ route('voyager.products.update', $dataTypeContent->id) }}@else{{ route('voyager.products.store') }}@endif" method="POST" enctype="multipart/form-data">
             <!-- PUT Method if we are editing -->
             @if($edit)
                 {{ method_field("PUT") }}
@@ -174,14 +174,14 @@
                     <!-- ### DETAILS ### -->
                     <div class="panel panel panel-bordered panel-warning">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><i class="icon wb-clipboard"></i> {{ __('voyager::post.details') }}</h3>
+                            <h3 class="panel-title"><i class="icon wb-clipboard"></i> {{ __('products.details') }}</h3>
                             <div class="panel-actions">
                                 <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
                             </div>
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
-                                <label for="slug">{{ __('voyager::post.slug') }}</label>
+                                <label for="slug">{{ __('products.slug') }}</label>
                                 @include('voyager::multilingual.input-hidden', [
                                     '_field_name'  => 'slug',
                                     '_field_trans' => get_field_translations($dataTypeContent, 'slug')
@@ -192,24 +192,20 @@
                                        value="{{ $dataTypeContent->slug ?? '' }}">
                             </div>
                             <div class="form-group">
-                                <label for="status">{{ __('voyager::post.status') }}</label>
+                                <label for="status">{{ __('products.status') }}</label>
                                 <select class="form-control" name="status">
-                                    <option value="PUBLISHED"@if(isset($dataTypeContent->status) && $dataTypeContent->status == 'PUBLISHED') selected="selected"@endif>{{ __('voyager::post.status_published') }}</option>
-                                    <option value="DRAFT"@if(isset($dataTypeContent->status) && $dataTypeContent->status == 'DRAFT') selected="selected"@endif>{{ __('voyager::post.status_draft') }}</option>
-                                    <option value="PENDING"@if(isset($dataTypeContent->status) && $dataTypeContent->status == 'PENDING') selected="selected"@endif>{{ __('voyager::post.status_pending') }}</option>
+                                    <option value="PUBLISHED"@if(isset($dataTypeContent->status) && $dataTypeContent->status == 'PUBLISHED') selected="selected"@endif>{{ __('products.status_published') }}</option>
+                                    <option value="DRAFT"@if(isset($dataTypeContent->status) && $dataTypeContent->status == 'DRAFT') selected="selected"@endif>{{ __('products.status_draft') }}</option>
+                                    <option value="PENDING"@if(isset($dataTypeContent->status) && $dataTypeContent->status == 'PENDING') selected="selected"@endif>{{ __('products.status_pending') }}</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="category_id">{{ __('voyager::post.category') }}</label>
+                                <label for="category_id">{{ __('products.category') }}</label>
                                 <select class="form-control" name="category_id">
                                     @foreach(Voyager::model('Category')::all() as $category)
                                         <option value="{{ $category->id }}"@if(isset($dataTypeContent->category_id) && $dataTypeContent->category_id == $category->id) selected="selected"@endif>{{ $category->name }}</option>
                                     @endforeach
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="featured">{{ __('voyager::generic.featured') }}</label>
-                                <input type="checkbox" name="featured"@if(isset($dataTypeContent->featured) && $dataTypeContent->featured) checked="checked"@endif>
                             </div>
                         </div>
                     </div>
@@ -217,7 +213,7 @@
                     <!-- ### IMAGE ### -->
                     <div class="panel panel-bordered panel-primary">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><i class="icon wb-image"></i> {{ __('voyager::post.image') }}</h3>
+                            <h3 class="panel-title"><i class="icon wb-image"></i> {{ __('products.image') }}</h3>
                             <div class="panel-actions">
                                 <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
                             </div>
@@ -227,6 +223,34 @@
                                 <img src="{{ filter_var($dataTypeContent->image, FILTER_VALIDATE_URL) ? $dataTypeContent->image : Voyager::image( $dataTypeContent->image ) }}" style="width:100%" />
                             @endif
                             <input type="file" name="image">
+                        </div>
+                    </div>
+
+                    <!-- ### LINKS ### -->
+                    <div class="panel panel-bordered panel-dark">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="icon wb-search"></i> {{ __('products.links') }}</h3>
+                            <div class="panel-actions">
+                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="seo_title">{{ __('products.buy_now') }}</label>
+                                @include('voyager::multilingual.input-hidden', [
+                                    '_field_name'  => 'buy_now_link',
+                                    '_field_trans' => get_field_translations($dataTypeContent, 'buy_now_link')
+                                ])
+                                <input type="text" class="form-control" name="buy_now_link" placeholder="Buy Now" value="{{ $dataTypeContent->buy_now_link ?? '' }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="seo_title">{{ __('products.live_demo') }}</label>
+                                @include('voyager::multilingual.input-hidden', [
+                                    '_field_name'  => 'live_demo_link',
+                                    '_field_trans' => get_field_translations($dataTypeContent, 'live_demo_link')
+                                ])
+                                <input type="text" class="form-control" name="live_demo_link" placeholder="Live Demo" value="{{ $dataTypeContent->live_demo_link ?? '' }}">
+                            </div>
                         </div>
                     </div>
 
@@ -270,7 +294,7 @@
 
             @section('submit-buttons')
                 <button type="submit" class="btn btn-primary pull-right">
-                    @if($edit){{ __('voyager::post.update') }}@else <i class="icon wb-plus-circle"></i> {{ __('voyager::post.new') }} @endif
+                    @if($edit){{ __('products.update') }}@else <i class="icon wb-plus-circle"></i> {{ __('products.new') }} @endif
                 </button>
             @stop
             @yield('submit-buttons')
