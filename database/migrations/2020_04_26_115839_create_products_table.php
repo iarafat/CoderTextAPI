@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->integer('category_id')->unsigned();
             $table->string('title');
             $table->string('slug')->unique();
+            $table->double('price')->nullable();
             $table->string('image');
             $table->text('body')->nullable();
             $table->enum('status', ['DRAFT', 'PUBLISHED', 'PENDING'])->default('DRAFT');

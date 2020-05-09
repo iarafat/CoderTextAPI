@@ -4,6 +4,7 @@ return [
     'sub_title' => 'The title for your product',
     'content' => 'Product Content',
     'details' => 'Product Details',
+    'price' => 'Product Price',
     'slug' => 'URL slug',
     'status' => 'Product Status',
     'status_published' => 'published',

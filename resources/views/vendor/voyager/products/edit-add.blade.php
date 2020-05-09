@@ -138,7 +138,7 @@
                             @php
                                 $dataTypeRows = $dataType->{($edit ? 'editRows' : 'addRows' )};
 
-                                $exclude = ['title', 'body', 'slug', 'status', 'category_id', 'image', 'meta_description', 'meta_keywords', 'seo_title', 'buy_now_link', 'live_demo_link'];
+                                $exclude = ['title','price', 'body', 'slug', 'status', 'category_id', 'image', 'meta_description', 'meta_keywords', 'seo_title', 'buy_now_link', 'live_demo_link'];
                             @endphp
 
                             @foreach($dataTypeRows as $row)
@@ -170,6 +170,7 @@
                     </div>
 
                 </div>
+
                 <div class="col-md-4">
                     <!-- ### DETAILS ### -->
                     <div class="panel panel panel-bordered panel-warning">
@@ -180,6 +181,17 @@
                             </div>
                         </div>
                         <div class="panel-body">
+                            <div class="form-group">
+                                <label for="price">{{ __('products.price') }}</label>
+                                @include('voyager::multilingual.input-hidden', [
+                                    '_field_name'  => 'price',
+                                    '_field_trans' => get_field_translations($dataTypeContent, 'price')
+                                ])
+                                <input type="text" class="form-control" id="price" name="price"
+                                       placeholder="Price"
+                                       {!! isFieldSlugAutoGenerator($dataType, $dataTypeContent, "price") !!}
+                                       value="{{ $dataTypeContent->price ?? '' }}">
+                            </div>
                             <div class="form-group">
                                 <label for="slug">{{ __('products.slug') }}</label>
                                 @include('voyager::multilingual.input-hidden', [
