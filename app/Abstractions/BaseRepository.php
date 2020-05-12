@@ -1,9 +1,10 @@
 <?php
 
 
-namespace App\Contracts\Repositories;
+namespace App\Abstractions;
 
 
+use App\Contracts\Repositories\BaseRepositoryInterface;
 use Exception;
 use Illuminate\{Database\Eloquent\Builder, Database\Eloquent\Model};
 
