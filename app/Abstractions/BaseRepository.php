@@ -33,7 +33,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      */
     private function prepareModelForRelationAndOrder($relation, array $orderBy = null)
     {
-        $model = $this->model;
+        $model = $this->getModel();
         if ($relation) {
             $model = $model->with($relation);
         }
@@ -53,7 +53,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
     public function getBySelectedColumns(array $columns): array
     {
         if (count($columns)) {
-            $collection = $this->model->select($columns)->get();
+            $collection = $this->getModel()->select($columns)->get();
             return $collection->toArray();
         }
 
@@ -81,7 +81,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      */
     public function create(array $data): array
     {
-        $resource = $this->model->create($data);
+        $resource = $this->getModel()->create($data);
         return $resource->toArray();
     }
 
@@ -94,7 +94,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      */
     public function update($id, array $data = []): array
     {
-        $resource = $this->model->find($id);
+        $resource = $this->getModel()->find($id);
         if (is_array($data) && count($data) > 0) {
             $resource->fill($data)->save();
         }
@@ -135,7 +135,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      */
     public function findByIds(array $ids): array
     {
-        $collection = $this->model->whereIn('id', $ids)->get();
+        $collection = $this->getModel()->whereIn('id', $ids)->get();
         return $collection->toArray();
     }
 
@@ -148,7 +148,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      */
     public function delete($id)
     {
-        return $this->model->find($id)->delete();
+        return $this->getModel()->find($id)->delete();
     }
 
     /**
