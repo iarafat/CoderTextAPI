@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SettingGroupAndKeysRequest extends FormRequest
+class SettingGroupRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,6 @@ class SettingGroupAndKeysRequest extends FormRequest
     {
         return [
             'group' => 'required',
-            'keys' => 'required',
         ];
     }
 }

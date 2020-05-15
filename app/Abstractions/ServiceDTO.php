@@ -4,6 +4,9 @@
 namespace App\Abstractions;
 
 
+
+use Illuminate\Database\Eloquent\Collection;
+
 class ServiceDTO
 {
     public $message, $statusCode, $data;
@@ -12,7 +15,7 @@ class ServiceDTO
      * ServiceDTO constructor.
      * @param string $message
      * @param int $statusCode
-     * @param array $data
+     * @param array|Collection $data
      */
     public function __construct(string $message, int $statusCode, $data = [])
     {

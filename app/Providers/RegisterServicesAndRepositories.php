@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Contracts\Repositories\SettingRepositoryInterface;
+use App\Contracts\Services\SettingServiceInterface;
 use App\Repositories\SettingRepository;
+use App\Services\SettingService;
 use Illuminate\Support\ServiceProvider;
 
 class RegisterServicesAndRepositories extends ServiceProvider
@@ -39,5 +41,6 @@ class RegisterServicesAndRepositories extends ServiceProvider
 
     private function services()
     {
+        $this->app->bind(SettingServiceInterface::class, SettingService::class);
     }
 }

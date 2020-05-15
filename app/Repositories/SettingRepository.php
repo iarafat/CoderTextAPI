@@ -10,17 +10,46 @@ use TCG\Voyager\Models\Setting;
 
 class SettingRepository extends BaseRepository implements SettingRepositoryInterface
 {
+    /**
+     * @var Setting
+     */
     protected $model;
 
+    /**
+     * SettingRepository constructor.
+     * @param Setting $setting
+     */
     public function __construct(Setting $setting)
     {
         $this->model = $setting;
     }
 
-    public function getSettings($group, $keys)
+    /**
+     * Get settings by group and keys
+     * @param $group
+     * @param $keys
+     * @return array
+     */
+    public function getSettingsByGroupAndKeys($group, $keys): array
     {
         $keys = explode(',', $keys);
-        $resources = $this->getModel()->where('group', $group)->whereIn('key', $keys)->get();
+        $resources = $this->getModel()
+            ->where('group', $group)
+            ->whereIn('key', $keys)
+            ->get();
+        return $resources->toArray();
+    }
+
+    /**
+     * Get settings by group
+     * @param $group
+     * @return array
+     */
+    public function getSettingsByGroup($group): array
+    {
+        $resources = $this->getModel()
+            ->where('group', $group)
+            ->get();
         return $resources->toArray();
     }
 }
