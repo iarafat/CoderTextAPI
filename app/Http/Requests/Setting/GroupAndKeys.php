@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Setting;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SettingGroupAndKeysRequest extends FormRequest
+class GroupAndKeys extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class SettingGroupAndKeysRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->isJson();
     }
 
     /**

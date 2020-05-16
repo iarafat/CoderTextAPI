@@ -27,4 +27,13 @@ interface SettingServiceInterface
      * @throws CustomException
      */
     public function getSettingsByGroup($group): ServiceDTO;
+
+    /**
+     * Get menus by name
+     *
+     * @param $name
+     * @return ServiceDTO
+     * @throws CustomException
+     */
+    public function getMenusByName($name): ServiceDTO;
 }

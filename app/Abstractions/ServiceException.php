@@ -23,7 +23,12 @@ class ServiceException
             $status = 422;
         } elseif ($exception instanceof AuthenticationException) {
             $status = 401;
-        } elseif ($exception instanceof QueryException || $exception instanceof \ErrorException || $exception instanceof \ReflectionException) {
+        } elseif (
+            $exception instanceof QueryException ||
+            $exception instanceof \ErrorException ||
+            $exception instanceof \Error ||
+            $exception instanceof \ReflectionException
+        ) {
             $status = 500;
         } elseif ($exception instanceof ModelNotFoundException) {
             $status = 404;

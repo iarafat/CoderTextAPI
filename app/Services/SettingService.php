@@ -61,4 +61,21 @@ class SettingService implements SettingServiceInterface
             ServiceException::throw($exception);
         }
     }
+
+    /**
+     * Get menus by name
+     *
+     * @param $name
+     * @return ServiceDTO
+     * @throws CustomException
+     */
+    public function getMenusByName($name): ServiceDTO
+    {
+        try {
+            $menus = $this->settingRepository->getMenusByName($name);
+            return new ServiceDTO('List of menus', 200, $menus);
+        } catch (Exception $exception) {
+            ServiceException::throw($exception);
+        }
+    }
 }

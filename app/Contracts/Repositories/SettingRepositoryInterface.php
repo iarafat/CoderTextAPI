@@ -20,4 +20,12 @@ interface SettingRepositoryInterface
      * @return array
      */
     public function getSettingsByGroup($group): array;
+
+    /**
+     * Get menus by name
+     *
+     * @param string $name
+     * @return array
+     */
+    public function getMenusByName(string $name): array;
 }
