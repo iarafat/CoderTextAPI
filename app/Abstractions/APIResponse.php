@@ -54,19 +54,19 @@ class APIResponse
 
     /**
      * Generate errors response
-     *
-     * @param string|array $errors 'error message' | ['message one', 'message two']
+     * @param $message
      * @param $statusCode
+     * @param array $errors
      * @return JsonResponse
      */
-    public function errors($errors, $statusCode)
+    public function errors($message, $statusCode, $errors = [])
     {
         $response = [
             'status' => [
-                'message' => 'Something went wrong!',
+                'message' => $message,
                 'code' => $statusCode,
             ],
-            'errors' => ['exception' => is_array($errors) ? $errors : [$errors]],
+            'errors' => $errors,
         ];
 
         return new JsonResponse($response, $statusCode);

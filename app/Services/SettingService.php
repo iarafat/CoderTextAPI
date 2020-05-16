@@ -5,11 +5,8 @@ namespace App\Services;
 
 
 use App\Abstractions\ServiceDTO;
-use App\Abstractions\ServiceException;
 use App\Contracts\Repositories\SettingRepositoryInterface;
 use App\Contracts\Services\SettingServiceInterface;
-use App\Exceptions\CustomException;
-use Exception;
 
 class SettingService implements SettingServiceInterface
 {
@@ -33,16 +30,11 @@ class SettingService implements SettingServiceInterface
      * @param $group
      * @param $keys
      * @return ServiceDTO
-     * @throws CustomException
      */
     public function getSettingsByGroupAndKeys($group, $keys): ServiceDTO
     {
-        try {
-            $settings = $this->settingRepository->getSettingsByGroupAndKeys($group, $keys);
-            return new ServiceDTO('List of settings', 200, $settings);
-        } catch (Exception $exception) {
-            ServiceException::throw($exception);
-        }
+        $settings = $this->settingRepository->getSettingsByGroupAndKeys($group, $keys);
+        return new ServiceDTO('List of settings', 200, $settings);
     }
 
     /**
@@ -50,16 +42,11 @@ class SettingService implements SettingServiceInterface
      *
      * @param $group
      * @return ServiceDTO
-     * @throws CustomException
      */
     public function getSettingsByGroup($group): ServiceDTO
     {
-        try {
-            $settings = $this->settingRepository->getSettingsByGroup($group);
-            return new ServiceDTO('List of settings', 200, $settings);
-        } catch (Exception $exception) {
-            ServiceException::throw($exception);
-        }
+        $settings = $this->settingRepository->getSettingsByGroup($group);
+        return new ServiceDTO('List of settings', 200, $settings);
     }
 
     /**
@@ -67,15 +54,10 @@ class SettingService implements SettingServiceInterface
      *
      * @param $name
      * @return ServiceDTO
-     * @throws CustomException
      */
     public function getMenusByName($name): ServiceDTO
     {
-        try {
-            $menus = $this->settingRepository->getMenusByName($name);
-            return new ServiceDTO('List of menus', 200, $menus);
-        } catch (Exception $exception) {
-            ServiceException::throw($exception);
-        }
+        $menus = $this->settingRepository->getMenusByName($name);
+        return new ServiceDTO('List of menus', 200, $menus);
     }
 }

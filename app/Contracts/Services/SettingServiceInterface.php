@@ -5,7 +5,6 @@ namespace App\Contracts\Services;
 
 
 use App\Abstractions\ServiceDTO;
-use App\Exceptions\CustomException;
 
 interface SettingServiceInterface
 {
@@ -15,7 +14,6 @@ interface SettingServiceInterface
      * @param $group
      * @param $keys
      * @return ServiceDTO
-     * @throws CustomException
      */
     public function getSettingsByGroupAndKeys($group, $keys): ServiceDTO;
 
@@ -24,7 +22,6 @@ interface SettingServiceInterface
      *
      * @param $group
      * @return ServiceDTO
-     * @throws CustomException
      */
     public function getSettingsByGroup($group): ServiceDTO;
 
@@ -33,7 +30,6 @@ interface SettingServiceInterface
      *
      * @param $name
      * @return ServiceDTO
-     * @throws CustomException
      */
     public function getMenusByName($name): ServiceDTO;
 }

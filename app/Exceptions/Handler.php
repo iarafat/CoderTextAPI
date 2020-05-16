@@ -2,7 +2,18 @@
 
 namespace App\Exceptions;
 
+use App\Abstractions\APIResponse;
+use Error;
+use ErrorException;
+use Exception;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use ReflectionException;
+use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -29,10 +40,10 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Throwable  $exception
+     * @param Throwable $exception
      * @return void
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function report(Throwable $exception)
     {
@@ -42,14 +53,29 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Throwable  $exception
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Request $request
+     * @param Throwable $exception
+     * @return Response
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function render($request, Throwable $exception)
     {
+        if ($exception instanceof ValidationException) {
+            return (new APIResponse())->errors($exception->getMessage(), 422, $exception->errors());
+        } elseif ($exception instanceof AuthenticationException) {
+            return (new APIResponse())->errors($exception->getMessage(), 401);
+        } elseif (
+            $exception instanceof QueryException ||
+            $exception instanceof ErrorException ||
+            $exception instanceof Error ||
+            $exception instanceof ReflectionException
+        ) {
+            return (new APIResponse())->errors($exception->getMessage(), 500);
+        } elseif ($exception instanceof ModelNotFoundException) {
+            return (new APIResponse())->errors($exception->getMessage(), 404);
+        }
+
         return parent::render($request, $exception);
     }
 }
