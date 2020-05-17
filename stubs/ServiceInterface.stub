@@ -1,0 +1,10 @@
+<?php
+
+
+namespace DummyNamespace;
+
+
+interface DummyServiceInterface
+{
+    // Your methods for service interface
+}

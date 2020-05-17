@@ -6,35 +6,36 @@ use Illuminate\Console\GeneratorCommand;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 
-class RepositoryMakeCommand extends GeneratorCommand
+class ServiceMakeCommand extends GeneratorCommand
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $name = 'make:repository';
+    protected $name = 'make:service';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new model Repository';
+    protected $description = 'Create a new model Service';
 
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'Repository';
+    protected $type = 'Service';
 
     /**
      * The name of class being generated.
      *
      * @var
      */
-    private $repositoryClass;
+    private $serviceClass;
+    private $serviceInterface;
     private $repositoryInterface;
 
     /**
@@ -42,8 +43,7 @@ class RepositoryMakeCommand extends GeneratorCommand
      *
      * @var
      */
-    private $model;
-    private $modelVariable;
+    private $repositoryVariable;
 
 
     /**
@@ -54,8 +54,8 @@ class RepositoryMakeCommand extends GeneratorCommand
      */
     public function handle()
     {
-        $this->setRepositoryClass();
-        $name = $this->qualifyClass($this->repositoryClass);
+        $this->setServiceClass();
+        $name = $this->qualifyClass($this->serviceClass);
         $path = $this->getPath($name);
 
         if ($this->alreadyExists($name)) {
@@ -66,21 +66,21 @@ class RepositoryMakeCommand extends GeneratorCommand
         $this->makeDirectory($path);
         $this->files->put($path, $this->sortImports($this->buildClass($name)));
         $this->info($this->type . ' created successfully.');
-        $this->line("<info>Created Repository: </info> $name");
+        $this->line("<info>Created Service: </info> $name");
     }
 
     /**
-     * Set repository class name
+     * Set service class name
      *
      * @return $this
      */
-    private function setRepositoryClass()
+    private function setServiceClass()
     {
         $name = ucwords(strtolower($this->getNameInput()));
-        $this->model = $name;
-        $this->modelVariable = lcfirst($this->getNameInput());
-        $this->repositoryClass = $name . 'Repository';
+        $this->serviceClass = $name . 'Service';
+        $this->serviceInterface = $name . 'ServiceInterface';
         $this->repositoryInterface = $name . 'RepositoryInterface';
+        $this->repositoryVariable = lcfirst($name . 'Repository');
         return $this;
     }
 
@@ -98,11 +98,11 @@ class RepositoryMakeCommand extends GeneratorCommand
             throw new InvalidArgumentException('Missing required argument model name');
         }
 
-        $stub = str_replace('DummyRepository', $this->repositoryClass, $stub);
+        $stub = str_replace('DummyServiceInterface', $this->serviceInterface, $stub);
         $stub = str_replace('DummyRepositoryInterface', $this->repositoryInterface, $stub);
-        $stub = str_replace('dummyVariable', $this->modelVariable, $stub);
+        $stub = str_replace('dummyRepositoryVariable', $this->repositoryVariable, $stub);
 
-        return str_replace('DummyModel', $this->model, $stub);
+        return str_replace('DummyService', $this->serviceClass, $stub);
     }
 
 
@@ -113,7 +113,7 @@ class RepositoryMakeCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return base_path('stubs/Repository.stub');
+        return base_path('stubs/Service.stub');
     }
 
     /**
@@ -124,6 +124,6 @@ class RepositoryMakeCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace.'\Repositories';
+        return $rootNamespace . '\Services';
     }
 }

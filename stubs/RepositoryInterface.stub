@@ -1,0 +1,10 @@
+<?php
+
+
+namespace DummyNamespace;
+
+
+interface DummyRepositoryInterface
+{
+    // Your methods for repository interface
+}

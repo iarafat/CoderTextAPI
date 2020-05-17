@@ -6,44 +6,35 @@ use Illuminate\Console\GeneratorCommand;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 
-class RepositoryMakeCommand extends GeneratorCommand
+class RepositoryInterfaceMakeCommand extends GeneratorCommand
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $name = 'make:repository';
+    protected $name = 'make:repository-interface';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new model Repository';
+    protected $description = 'Create a new model Repository Interface';
 
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'Repository';
+    protected $type = 'RepositoryInterface';
 
     /**
      * The name of class being generated.
      *
      * @var
      */
-    private $repositoryClass;
     private $repositoryInterface;
-
-    /**
-     * The name of class being generated.
-     *
-     * @var
-     */
-    private $model;
-    private $modelVariable;
 
 
     /**
@@ -54,8 +45,8 @@ class RepositoryMakeCommand extends GeneratorCommand
      */
     public function handle()
     {
-        $this->setRepositoryClass();
-        $name = $this->qualifyClass($this->repositoryClass);
+        $this->setRepositoryInterface();
+        $name = $this->qualifyClass($this->repositoryInterface);
         $path = $this->getPath($name);
 
         if ($this->alreadyExists($name)) {
@@ -66,20 +57,17 @@ class RepositoryMakeCommand extends GeneratorCommand
         $this->makeDirectory($path);
         $this->files->put($path, $this->sortImports($this->buildClass($name)));
         $this->info($this->type . ' created successfully.');
-        $this->line("<info>Created Repository: </info> $name");
+        $this->line("<info>Created Repository Interface: </info> $name");
     }
 
     /**
-     * Set repository class name
+     * Set repository interface class name
      *
      * @return $this
      */
-    private function setRepositoryClass()
+    private function setRepositoryInterface()
     {
         $name = ucwords(strtolower($this->getNameInput()));
-        $this->model = $name;
-        $this->modelVariable = lcfirst($this->getNameInput());
-        $this->repositoryClass = $name . 'Repository';
         $this->repositoryInterface = $name . 'RepositoryInterface';
         return $this;
     }
@@ -98,11 +86,7 @@ class RepositoryMakeCommand extends GeneratorCommand
             throw new InvalidArgumentException('Missing required argument model name');
         }
 
-        $stub = str_replace('DummyRepository', $this->repositoryClass, $stub);
-        $stub = str_replace('DummyRepositoryInterface', $this->repositoryInterface, $stub);
-        $stub = str_replace('dummyVariable', $this->modelVariable, $stub);
-
-        return str_replace('DummyModel', $this->model, $stub);
+        return str_replace('DummyRepositoryInterface', $this->repositoryInterface, $stub);
     }
 
 
@@ -113,7 +97,7 @@ class RepositoryMakeCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return base_path('stubs/Repository.stub');
+        return base_path('stubs/RepositoryInterface.stub');
     }
 
     /**
@@ -124,6 +108,6 @@ class RepositoryMakeCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace.'\Repositories';
+        return $rootNamespace.'\Contracts\Repositories';
     }
 }
