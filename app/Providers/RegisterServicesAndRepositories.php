@@ -2,9 +2,13 @@
 
 namespace App\Providers;
 
+use App\Contracts\Repositories\CategoryRepositoryInterface;
 use App\Contracts\Repositories\SettingRepositoryInterface;
+use App\Contracts\Services\CategoryServiceInterface;
 use App\Contracts\Services\SettingServiceInterface;
+use App\Repositories\CategoryRepository;
 use App\Repositories\SettingRepository;
+use App\Services\CategoryService;
 use App\Services\SettingService;
 use Illuminate\Support\ServiceProvider;
 
@@ -37,10 +41,12 @@ class RegisterServicesAndRepositories extends ServiceProvider
     private function repositories()
     {
         $this->app->bind(SettingRepositoryInterface::class, SettingRepository::class);
+        $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
     }
 
     private function services()
     {
         $this->app->bind(SettingServiceInterface::class, SettingService::class);
+        $this->app->bind(CategoryServiceInterface::class, CategoryService::class);
     }
 }

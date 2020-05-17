@@ -12,7 +12,20 @@ use Illuminate\Support\Facades\Route;
  * @api Settings routes
  */
 Route::prefix('settings')->name('settings')->group(function () {
+
     Route::get('by-group', 'SettingController@getSettingsByGroup')->name('.group');
     Route::get('by-group-keys', 'SettingController@getSettingsByGroupAndKeys')->name('.group.keys');
     Route::get('menus', 'SettingController@getMenusByName')->name('.menus');
+
+});
+
+/**
+ * @api Categories routes
+ */
+Route::prefix('categories')->name('categories')->group(function () {
+
+    Route::get('/', 'CategoryController@getCategoriesByLimit');
+    Route::get('/posts', 'CategoryController@getCategoryWithPosts')->name('.posts');
+    Route::get('/products', 'CategoryController@getCategoryWithProducts')->name('.products');
+
 });

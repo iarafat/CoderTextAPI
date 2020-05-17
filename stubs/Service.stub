@@ -7,7 +7,6 @@ namespace DummyNamespace;
 use App\Contracts\Repositories\DummyRepositoryInterface;
 use App\Contracts\Services\DummyServiceInterface;
 
-
 class DummyService implements DummyServiceInterface
 {
     /**
