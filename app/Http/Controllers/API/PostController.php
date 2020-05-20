@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Abstractions\APIResponse;
 use App\Contracts\Services\PostServiceInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\Index;
@@ -15,20 +14,16 @@ class PostController extends Controller
      * @var PostServiceInterface
      */
     protected $postService;
-    /**
-     * @var APIResponse
-     */
-    protected $apiResponse;
 
     /**
      * PostController constructor.
      * @param PostServiceInterface $postService
-     * @param APIResponse $apiResponse
      */
-    public function __construct(PostServiceInterface $postService, APIResponse $apiResponse)
+    public function __construct(PostServiceInterface $postService)
     {
+        parent::__construct();
+
         $this->postService = $postService;
-        $this->apiResponse = $apiResponse;
     }
 
     /**
@@ -40,7 +35,7 @@ class PostController extends Controller
     public function index(Index $request)
     {
         $response = $this->postService->index();
-        return $this->apiResponse->success($response->data, $response->message, $response->statusCode);
+        return $this->response($response);
     }
 
     /**
@@ -52,6 +47,6 @@ class PostController extends Controller
     public function show(Show $request)
     {
         $response = $this->postService->show($request->slug);
-        return $this->apiResponse->success($response->data, $response->message, $response->statusCode);
+        return $this->response($response);
     }
 }

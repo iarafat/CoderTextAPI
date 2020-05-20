@@ -53,15 +53,4 @@ class SettingRepository extends BaseRepository implements SettingRepositoryInter
         return $resources->toArray();
     }
 
-    /**
-     * Get menus by name
-     *
-     * @param string $name
-     * @return array
-     */
-    public function getMenusByName(string $name): array
-    {
-        $resources = menu($name, '_json');
-        return $resources->toArray();
-    }
 }

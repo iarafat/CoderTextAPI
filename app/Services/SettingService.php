@@ -34,7 +34,7 @@ class SettingService implements SettingServiceInterface
     public function getSettingsByGroupAndKeys($group, $keys): ServiceDTO
     {
         $settings = $this->settingRepository->getSettingsByGroupAndKeys($group, $keys);
-        return new ServiceDTO('List of settings', 200, $settings);
+        return new ServiceDTO('List of settings by group and keys', 200, $settings);
     }
 
     /**
@@ -46,18 +46,6 @@ class SettingService implements SettingServiceInterface
     public function getSettingsByGroup($group): ServiceDTO
     {
         $settings = $this->settingRepository->getSettingsByGroup($group);
-        return new ServiceDTO('List of settings', 200, $settings);
-    }
-
-    /**
-     * Get menus by name
-     *
-     * @param $name
-     * @return ServiceDTO
-     */
-    public function getMenusByName($name): ServiceDTO
-    {
-        $menus = $this->settingRepository->getMenusByName($name);
-        return new ServiceDTO('List of menus', 200, $menus);
+        return new ServiceDTO('List of settings by group', 200, $settings);
     }
 }

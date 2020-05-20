@@ -24,12 +24,4 @@ interface SettingServiceInterface
      * @return ServiceDTO
      */
     public function getSettingsByGroup($group): ServiceDTO;
-
-    /**
-     * Get menus by name
-     *
-     * @param $name
-     * @return ServiceDTO
-     */
-    public function getMenusByName($name): ServiceDTO;
 }
