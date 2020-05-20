@@ -18,13 +18,6 @@ Route::prefix('settings')->name('settings')->group(function () {
 
 });
 
-
-/**
- * @api menus route
- */
-Route::get('menus', 'GlobalController@getMenusByName')->name('menus');
-
-
 /**
  * @api Categories routes
  */
@@ -60,3 +53,9 @@ Route::prefix('posts')->name('posts')->group(function () {
  * @api pages routes
  */
 Route::get('pages/{slug}', 'PageController@show')->name('pages.show');
+
+/**
+ * @api global routes
+ */
+Route::get('menus', 'GlobalController@getMenusByName')->name('menus');
+Route::post('contact-form', 'GlobalController@contactForm')->name('contact.form');

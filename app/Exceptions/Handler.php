@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use ReflectionException;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
@@ -75,8 +76,10 @@ class Handler extends ExceptionHandler
             return (new APIResponse())->errors($exception->getMessage(), 500);
         } elseif ($exception instanceof ModelNotFoundException) {
             return (new APIResponse())->errors($exception->getMessage(), 404);
+        } elseif ($exception instanceof AccessDeniedHttpException) {
+            return (new APIResponse())->errors($exception->getMessage(), 403);
         } elseif ($exception instanceof NotFoundHttpException) {
-            $email = env('EMERGENCY_CONTACT_EMAIL');
+            $email = setting('contact-form.receive_email');
             return (new APIResponse())->errors("Whoops, looks like something went wrong. If error persists, contact $email", 404);
         }
 

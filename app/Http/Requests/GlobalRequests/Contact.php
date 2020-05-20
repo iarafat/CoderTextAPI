@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Setting;
+namespace App\Http\Requests\GlobalRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Menu extends FormRequest
+class Contact extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,11 @@ class Menu extends FormRequest
     public function rules()
     {
         return [
-            'menu' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'subject' => 'required',
+            'email' => 'required|email',
+            'message' => 'required',
         ];
     }
 }

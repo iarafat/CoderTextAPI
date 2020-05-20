@@ -15,4 +15,12 @@ interface GlobalServiceInterface
      * @return ServiceDTO
      */
     public function getMenusByName($name): ServiceDTO;
+
+    /**
+     * Send contact email
+     *
+     * @param array $inputs
+     * @return ServiceDTO
+     */
+    public function sendContactMessage(array $inputs): ServiceDTO;
 }
