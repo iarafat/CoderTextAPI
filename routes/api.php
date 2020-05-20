@@ -42,7 +42,7 @@ Route::prefix('categories')->name('categories')->group(function () {
 Route::prefix('products')->name('products')->group(function () {
 
     Route::get('/', 'ProductController@index');
-    Route::get('/{slug}', 'ProductController@show');
+    Route::get('/{slug}', 'ProductController@show')->name('.show');;
 
 });
 
@@ -52,6 +52,11 @@ Route::prefix('products')->name('products')->group(function () {
 Route::prefix('posts')->name('posts')->group(function () {
 
     Route::get('/', 'PostController@index');
-    Route::get('/{slug}', 'PostController@show');
+    Route::get('/{slug}', 'PostController@show')->name('.show');
 
 });
+
+/**
+ * @api pages routes
+ */
+Route::get('pages/{slug}', 'PageController@show')->name('pages.show');
