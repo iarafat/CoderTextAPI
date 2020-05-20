@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Product;
+namespace App\Http\Requests\Post;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +24,7 @@ class Show extends FormRequest
     public function rules()
     {
         return [
-            'slug' => 'required|exists:products,slug',
+            'slug' => 'required|exists:posts,slug',
         ];
     }
 

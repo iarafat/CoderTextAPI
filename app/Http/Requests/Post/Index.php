@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Product;
+namespace App\Http\Requests\Post;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Show extends FormRequest
+class Index extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,18 +24,7 @@ class Show extends FormRequest
     public function rules()
     {
         return [
-            'slug' => 'required|exists:products,slug',
+            'page' => 'required',
         ];
-    }
-
-    /**
-     * Get data to be validated from the request.
-     *
-     * Use route parameters for validation.
-     * @return array
-     */
-    public function validationData()
-    {
-        return array_merge($this->all(),  $this->route()->parameters());
     }
 }

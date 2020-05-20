@@ -14,11 +14,11 @@ class CategoryController extends Controller
     /**
      * @var CategoryServiceInterface
      */
-    private $categoryService;
+    protected $categoryService;
     /**
      * @var APIResponse
      */
-    private $apiResponse;
+    protected $apiResponse;
 
     /**
      * CategoryController constructor.

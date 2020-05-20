@@ -39,3 +39,13 @@ Route::prefix('products')->name('products')->group(function () {
     Route::get('/{slug}', 'ProductController@show');
 
 });
+
+/**
+ * @api Posts routes
+ */
+Route::prefix('posts')->name('posts')->group(function () {
+
+    Route::get('/', 'PostController@index');
+    Route::get('/{slug}', 'PostController@show');
+
+});

@@ -3,55 +3,55 @@
 namespace App\Http\Controllers\API;
 
 use App\Abstractions\APIResponse;
-use App\Contracts\Services\ProductServiceInterface;
+use App\Contracts\Services\PostServiceInterface;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Product\Index;
-use App\Http\Requests\Product\Show;
+use App\Http\Requests\Post\Index;
+use App\Http\Requests\Post\Show;
 use Illuminate\Http\JsonResponse;
 
-class ProductController extends Controller
+class PostController extends Controller
 {
     /**
-     * @var ProductServiceInterface
+     * @var PostServiceInterface
      */
-    protected $productService;
+    protected $postService;
     /**
      * @var APIResponse
      */
     protected $apiResponse;
 
     /**
-     * ProductController constructor.
-     * @param ProductServiceInterface $productService
+     * PostController constructor.
+     * @param PostServiceInterface $postService
      * @param APIResponse $apiResponse
      */
-    public function __construct(ProductServiceInterface $productService, APIResponse $apiResponse)
+    public function __construct(PostServiceInterface $postService, APIResponse $apiResponse)
     {
-        $this->productService = $productService;
+        $this->postService = $postService;
         $this->apiResponse = $apiResponse;
     }
 
     /**
-     * Get products with paginate
+     * Get posts with paginate
      *
      * @param Index $request
      * @return JsonResponse
      */
     public function index(Index $request)
     {
-        $response = $this->productService->index();
+        $response = $this->postService->index();
         return $this->apiResponse->success($response->data, $response->message, $response->statusCode);
     }
 
     /**
-     * Get product by slug
+     * Get post by slug
      *
      * @param Show $request
      * @return JsonResponse
      */
     public function show(Show $request)
     {
-        $response = $this->productService->show($request->slug);
+        $response = $this->postService->show($request->slug);
         return $this->apiResponse->success($response->data, $response->message, $response->statusCode);
     }
 }
