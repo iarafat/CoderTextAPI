@@ -29,3 +29,13 @@ Route::prefix('categories')->name('categories')->group(function () {
     Route::get('/products', 'CategoryController@getCategoryWithProducts')->name('.products');
 
 });
+
+/**
+ * @api Products routes
+ */
+Route::prefix('products')->name('products')->group(function () {
+
+    Route::get('/', 'ProductController@index');
+    Route::get('/{slug}', 'ProductController@show');
+
+});

@@ -28,4 +28,11 @@ class Category extends BaseModel
             ->published()
             ->orderBy('created_at', 'DESC');
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class)
+            ->published()
+            ->orderBy('created_at', 'DESC');
+    }
 }
