@@ -1,12 +1,12 @@
 <?php
 
 
-namespace App\Abstractions;
+namespace App\Traits;
 
 
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class CustomPagination
+trait Paginatable
 {
     public function paginate($items, $perPage = 15, $page = 1, $routeName = 'search')
     {

@@ -4,15 +4,17 @@
 namespace App\Repositories;
 
 
-use App\Abstractions\CustomPagination;
 use App\Contracts\Repositories\GlobalRepositoryInterface;
 use App\Post;
 use App\Product;
+use App\Traits\Paginatable;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Spatie\Searchable\Search;
 
 class GlobalRepository implements GlobalRepositoryInterface
 {
+    use Paginatable;
+
     /**
      * Get menus by name
      *
@@ -38,7 +40,7 @@ class GlobalRepository implements GlobalRepositoryInterface
             ->registerModel(Product::class, ['price', 'title', 'body'])
             ->registerModel(Post::class, ['title', 'body'])
             ->search($query);
-        return (new CustomPagination())->paginate($searchResults, 9, $page);
+        return $this->paginate($searchResults, 9, $page);
     }
 
 
