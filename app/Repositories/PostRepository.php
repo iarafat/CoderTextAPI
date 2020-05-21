@@ -28,14 +28,13 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
      * Get posts with paginate
      *
      * @param int $limit
-     * @return array
+     * @return
      */
-    public function getPosts($limit = 9): array
+    public function getPosts($limit = 9)
     {
-        $resources = $this->getModel()
+        return $this->getModel()
             ->published()
             ->paginate($limit);
-        return $resources->toArray();
     }
 
     /**

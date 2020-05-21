@@ -19,16 +19,16 @@ interface CategoryServiceInterface
     /**
      * Get category with posts
      *
-     * @param $categoryId
+     * @param $slug
      * @return ServiceDTO
      */
-    public function getCategoryWithPosts($categoryId): ServiceDTO;
+    public function getCategoryWithPosts($slug): ServiceDTO;
 
     /**
      * Get category with products
      *
-     * @param $categoryId
+     * @param $slug
      * @return ServiceDTO
      */
-    public function getCategoryWithProducts($categoryId): ServiceDTO;
+    public function getCategoryWithProducts($slug): ServiceDTO;
 }

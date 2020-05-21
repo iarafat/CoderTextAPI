@@ -46,7 +46,7 @@ class CategoryController extends Controller
      */
     public function getCategoryWithPosts(GetCategory $request)
     {
-        $response = $this->categoryService->getCategoryWithPosts($request->category_id);
+        $response = $this->categoryService->getCategoryWithPosts($request->slug);
         return $this->response($response);
     }
 
@@ -58,7 +58,7 @@ class CategoryController extends Controller
      */
     public function getCategoryWithProducts(GetCategory $request)
     {
-        $response = $this->categoryService->getCategoryWithProducts($request->category_id);
+        $response = $this->categoryService->getCategoryWithProducts($request->slug);
         return $this->response($response);
     }
 }

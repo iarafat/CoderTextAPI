@@ -24,7 +24,7 @@ class GetCategory extends FormRequest
     public function rules()
     {
         return [
-            'category_id' => 'required|exists:categories,id',
+            'slug' => 'required|exists:categories,slug',
         ];
     }
 }

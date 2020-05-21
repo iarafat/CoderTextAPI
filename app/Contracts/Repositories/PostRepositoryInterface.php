@@ -10,9 +10,8 @@ interface PostRepositoryInterface
      * Get posts with paginate
      *
      * @param int $limit
-     * @return array
      */
-    public function getPosts($limit = 9): array;
+    public function getPosts($limit = 9);
 
     /**
      * Get post by slug

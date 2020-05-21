@@ -44,26 +44,30 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
     /**
      * Get category with posts
      *
-     * @param $categoryId
-     * @return array
+     * @param $slug
+     * @return
      */
-    public function getCategoryWithPosts($categoryId): array
+    public function getCategoryWithPosts($slug)
     {
-        $resource = $this->getModel()->find($categoryId);
-        $resource = $resource->setRelation('posts', $resource->posts()->paginate(9));
-        return $resource->toArray();
+        return $this->getModel()
+            ->where(['slug' => $slug])
+            ->first()
+            ->posts()
+            ->paginate(9);
     }
 
     /**
      * Get category with products
      *
-     * @param $categoryId
-     * @return array
+     * @param $slug
+     * @return
      */
-    public function getCategoryWithProducts($categoryId): array
+    public function getCategoryWithProducts($slug)
     {
-        $resource = $this->getModel()->find($categoryId);
-        $resource = $resource->setRelation('products', $resource->products()->paginate(9));
-        return $resource->toArray();
+        return $this->getModel()
+            ->where(['slug' => $slug])
+            ->first()
+            ->products()
+            ->paginate(9);
     }
 }

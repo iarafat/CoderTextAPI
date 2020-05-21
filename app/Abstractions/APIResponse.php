@@ -45,10 +45,10 @@ class APIResponse
     {
         return [
             'total' => $data->total(),
-            'current_items_count' => $data->count(),
-            'items_per_page' => $data->perPage(),
-            'current_page_no' => $data->currentPage(),
-            'has_more_pages' => $data->hasMorePages(),
+            'per_page' => $data->perPage(),
+            'current_page' => $data->currentPage(),
+            'prev_page_url' => $data->previousPageUrl(),
+            'next_page_url' => $data->nextPageUrl(),
         ];
     }
 

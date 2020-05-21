@@ -39,24 +39,24 @@ class CategoryService implements CategoryServiceInterface
     /**
      * Get category with posts
      *
-     * @param $categoryId
+     * @param $slug
      * @return ServiceDTO
      */
-    public function getCategoryWithPosts($categoryId): ServiceDTO
+    public function getCategoryWithPosts($slug): ServiceDTO
     {
-        $category = $this->categoryRepository->getCategoryWithPosts($categoryId);
+        $category = $this->categoryRepository->getCategoryWithPosts($slug);
         return new ServiceDTO('Category with list of posts', 200, $category);
     }
 
     /**
      * Get category with products
      *
-     * @param $categoryId
+     * @param $slug
      * @return ServiceDTO
      */
-    public function getCategoryWithProducts($categoryId): ServiceDTO
+    public function getCategoryWithProducts($slug): ServiceDTO
     {
-        $category = $this->categoryRepository->getCategoryWithProducts($categoryId);
+        $category = $this->categoryRepository->getCategoryWithProducts($slug);
         return new ServiceDTO('Category with list of products', 200, $category);
     }
 }

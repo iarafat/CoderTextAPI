@@ -10,9 +10,8 @@ interface ProductRepositoryInterface
      * Get products with paginate
      *
      * @param int $limit
-     * @return array
      */
-    public function getProducts($limit = 9): array;
+    public function getProducts($limit = 9);
 
     /**
      * Get product by slug

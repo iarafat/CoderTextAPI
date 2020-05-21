@@ -17,16 +17,16 @@ interface CategoryRepositoryInterface
     /**
      * Get category with posts
      *
-     * @param $categoryId
-     * @return array
+     * @param $slug
+     * @return
      */
-    public function getCategoryWithPosts($categoryId): array;
+    public function getCategoryWithPosts($slug);
 
     /**
      * Get category with products
      *
-     * @param $categoryId
-     * @return array
+     * @param $slug
+     * @return
      */
-    public function getCategoryWithProducts($categoryId): array;
+    public function getCategoryWithProducts($slug);
 }

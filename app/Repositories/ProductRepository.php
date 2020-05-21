@@ -28,14 +28,13 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
      * Get products with paginate
      *
      * @param int $limit
-     * @return array
+     * @return
      */
-    public function getProducts($limit = 9): array
+    public function getProducts($limit = 9)
     {
-        $resources = $this->getModel()
+        return $this->getModel()
             ->published()
             ->paginate($limit);
-        return $resources->toArray();
     }
 
     /**
