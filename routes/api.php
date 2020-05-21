@@ -57,5 +57,6 @@ Route::get('pages/{slug}', 'PageController@show')->name('pages.show');
 /**
  * @api global routes
  */
+Route::get('search', 'GlobalController@search')->name('search');
 Route::get('menus', 'GlobalController@getMenusByName')->name('menus');
 Route::post('contact-form', 'GlobalController@contactForm')->name('contact.form');

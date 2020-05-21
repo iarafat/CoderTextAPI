@@ -5,11 +5,13 @@ namespace App;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Traits\Resizable;
 use TCG\Voyager\Traits\Translatable;
 
-class Product extends Model
+class Product extends Model implements Searchable
 {
     use Translatable, Resizable;
 
@@ -50,5 +52,16 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function getSearchResult(): SearchResult
+    {
+        $url = route('products.show', $this->slug);
+
+        return new SearchResult(
+            $this,
+            $this->title,
+            $url
+        );
     }
 }

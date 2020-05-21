@@ -64,4 +64,17 @@ class GlobalService implements GlobalServiceInterface
 
         return new ServiceDTO('Message send successfully', 200);
     }
+
+    /**
+     * Search on products and posts tables
+     *
+     * @param $query
+     * @param $page
+     * @return ServiceDTO
+     */
+    public function search($query, $page): ServiceDTO
+    {
+        $searchResults = $this->globalRepository->search($query, $page);
+        return new ServiceDTO('List of search results of products and posts', 200, $searchResults);
+    }
 }

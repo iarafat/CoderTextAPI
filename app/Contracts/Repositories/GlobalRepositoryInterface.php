@@ -4,6 +4,8 @@
 namespace App\Contracts\Repositories;
 
 
+use Illuminate\Pagination\LengthAwarePaginator;
+
 interface GlobalRepositoryInterface
 {
     /**
@@ -13,4 +15,13 @@ interface GlobalRepositoryInterface
      * @return array
      */
     public function getMenusByName(string $name): array;
+
+    /**
+     * Search on products and posts tables
+     *
+     * @param $query
+     * @param $page
+     * @return LengthAwarePaginator
+     */
+    public function search($query, $page);
 }
