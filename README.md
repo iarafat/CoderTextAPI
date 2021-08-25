@@ -32,6 +32,13 @@ If you prefer migrate it with dummy data then use `--seed` flag or run `php arti
 php artisan migrate
 ```
 
+
+### 4. Run Necessary Commands
+
+```bash
+php artisan storage:link
+```
+
 And we're all good to go!
 
 Start up a local development server with `php artisan serve` And, visit [http://localhost:8000/admin](http://localhost:8000/admin).

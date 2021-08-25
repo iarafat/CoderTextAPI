@@ -23,7 +23,7 @@ class APIResponse
             ]
         ];
 
-        if (method_exists($data, 'total')) {
+        if (!is_array($data) && method_exists($data, 'total')) {
             $response = array_merge(
                 $response,
                 [
