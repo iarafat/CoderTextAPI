@@ -1,5 +1,5 @@
 ## Project Information
-This is a APIs and Admin panel based project for Nuxt.js front-end app.
+This is an APIs and Admin panel-based project for the Nuxt.js front-end app.
 
 ### Admin login
 Browse admin panel with this url `/admin` and using admin user credentials to login. With dummy data:
