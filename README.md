@@ -25,12 +25,15 @@ You will also want to update your website URL inside of the `APP_URL` variable i
 APP_URL=http://localhost:8000
 ```
 
-### 3. Run Migration
+### 3. Run Migration OR Import SQL
 If you prefer migrate it with dummy data then use `--seed` flag or run `php artisan db:seed` with specific seed files.
 
 ```bash
 php artisan migrate
 ```
+#### Import SQL
+- SQL file location `database/sql/codertextapi.sql` 
+- Import the sql file into your database to access dummy data.
 
 
 ### 4. Run Necessary Commands
