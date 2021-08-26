@@ -1,3 +1,40 @@
+## Project Information
+This is a APIs and Admin panel based project for Nuxt.js front-end app.
+
+### Admin login
+Browse admin panel with this url `/admin` and using admin user credentials to login. With dummy data:
+```
+Email: admin@admin.com
+Password: password
+```
+
+### POSTMAN APIs collection
+Here is the postman APIs collection to interact with API.
+- https://www.getpostman.com/collections/f926c292f72b94261c33
+
+### Layered Creating Custom Artisan Commands
+Create Layers for Model; Repository, RepositoryInterface, Service, ServiceInterface.
+```
+php artisan make:layers Product
+```
+Create a new model Repository Interface
+```
+php artisan make:repository-interface Product
+```
+Create a new model Repository.
+```
+php artisan make:repository Product
+```
+Create a new model Service Interface.
+```
+php artisan make:service-interface Product
+```
+Create a new model Service.
+```
+php artisan make:service Product
+```
+
+
 ## Installation Steps
 
 ### 1. Install the Packages
@@ -25,15 +62,16 @@ You will also want to update your website URL inside of the `APP_URL` variable i
 APP_URL=http://localhost:8000
 ```
 
-### 3. Run Migration OR Import SQL
-If you prefer migrate it with dummy data then use `--seed` flag or run `php artisan db:seed` with specific seed files.
+### 3. Run Migration OR Import SQL OR Seed dummy data
+#### Migration
+- `php artisan migrate`
 
-```bash
-php artisan migrate
-```
 #### Import SQL
 - SQL file location `database/sql/codertextapi.sql` 
 - Import the sql file into your database to access dummy data.
+
+#### Seed Data
+- If you prefer seed dummy data then run `php artisan db:seed` with specific seed file using `--class` flag.
 
 
 ### 4. Run Necessary Commands
