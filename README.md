@@ -82,7 +82,7 @@ php artisan storage:link
 
 And we're all good to go!
 
-Start up a local development server with `php artisan serve` And, visit [http://localhost:8000/admin](http://localhost:8000/admin).
+Start up a local development server And, visit [http://codertextapi.test/admin](http://codertextapi.test/admin).
 
 ## Creating an Admin User
 
